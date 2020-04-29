@@ -16428,6 +16428,13 @@ How many users in the test set are we not able to make predictions for because o
 <p>The value of accuracy does not show a complete overview of the system behavior. It is necessary to analyse also the precison and recall in parallel to better understand the influence of the number of latent features.</p>
 <p>We can use 200 Latent Features in order to achive a better accuracy for training and test set and also a value of precision and recall as good as possible, since while precision decreases the recall increases.</p>
 <p>The problem is that We can not predict to users/articles that we did not see before, in this case We can combine different recommendations systems, as with ranking based and knowledge based methods. In case of naN values we can use FUNKSVD algorithm.</p>
+<p>After, to implement the recommendation system we may evaluate if it is working as expected.
+We first divide the users of IBM platform into two groups, experimental and control groups. An account-based diversion (i.e. User ID) method can be applied in this experiment, since to access the IBM platform is necessary to register. The experimental group will see the articles recommended by the system while the control group will not.
+Next, we identify the metric which can be compared/evaluated between the control and experimental groups in an A/B test. In this case we can consider, for example, the number of articles read by each user (interactions) in a period of time. It means, how many articles one user read per week. Different metrics can be proposed but should be distinguished between invariant metrics and neither variant or invariant. For example, the number of accesses at the IBM platform should be an invariant metric, since the number of users assigned to each group should be about the same.
+After that, we must define the amount of time the experiment will take to run. Let's say that we want to detect, for example, an increase of 2 articles read per week by the users. Based on the currently metric value, the number of articles read per week, (we do not have access to that metric in this project), we want to answer the question: How many days of data we would need to collect in order to get enough information to detect this new rate at an overall 5% Type I error rate and at 80% power?
+After collect the data, we perform the A/B test to statistically confirm the efficiency of the recommendation system. The null hypothesis in this case is that the number of articles read per week in the experimental group is equal or less than in the control group.
+If the p-value found is less than alpha (type one error rate, for example, 0.05 – since we only have one metric, we should not apply the Bonferroni correction in this case), the null hypothesis will be rejected, that means the number of articles read (interactions) per week is greater in the experimental group than in the control group, and the recommendation system works as expected.
+A further discussion must be done together IBM to evaluate validity, bias, and ethics points and practical viability of implement the proposed experiment.</p>
 
 </div>
 </div>
@@ -16450,7 +16457,7 @@ How many users in the test set are we not able to make predictions for because o
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[281]:</div>
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">subprocess</span> <span class="k">import</span> <span class="n">call</span>
@@ -16467,7 +16474,7 @@ How many users in the test set are we not able to make predictions for because o
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[281]:</div>
+    <div class="prompt output_prompt">Out[60]:</div>
 
 
 
